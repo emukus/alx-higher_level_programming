@@ -3,6 +3,6 @@ def uppercase(str):
     """Print a string in uppercase."""
     for i in str:
         if ord('a') <= ord(i) <= ord('z'):
-            i = cht(ord(c) - (ord('a') - ord('A')))
+            i = chr(ord(c) - (ord('a') - ord('A')))
         print("{:s}".format(i), end='')
     print("")
