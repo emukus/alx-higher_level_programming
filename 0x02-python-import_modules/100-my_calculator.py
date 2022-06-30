@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    """Imports all functions from calculator_1 and handles
-    basic operations."""
+    """Imports all functions from calculator_1 and handles basic operations."""
     from sys import argv
     if len(argv) != 4:
-        print("Usage ./100-my_calculator.py <a> <operator> <b>")
+        print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         quit(1)
     a = int(argv[1])
     b = int(argv[3])
