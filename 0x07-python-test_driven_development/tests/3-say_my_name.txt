@@ -1,7 +1,7 @@
 The ``3-say_my_name`` module
 ======================
 
-Usage ``say_my_name``
+Using ``say_my_name``
 -------------------
 
 Importing the function from the module:

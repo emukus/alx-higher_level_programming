@@ -1,7 +1,7 @@
 The ``5-`text_indentation` module
 ======================
 
-Usage``text_indentation``
+Using ``text_indentation``
 -------------------
 
 Importing the function from the module:
