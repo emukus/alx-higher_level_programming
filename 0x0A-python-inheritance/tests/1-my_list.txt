@@ -1,13 +1,15 @@
-``1-my_list`` module
+The ``1-my_list`` module
 ============================
 
 Using ``MyList``
 ---------------------
 
-Refer to the following documentation for details
-on proper guidelines:
+This is a text file in reStructuredText format. Refer to the
+following documentation for details on proper guidelines:
 https://docs.python.org/3/library/doctest.html
+First import ``MyList`` from the ``1-my_list`` module:
 
+>>> MyList = __import__('1-my_list').MyList
 
 Command line call for Doctest:
 python3 -m doctest -v ./tests/1-my_list.txt | tail -2
