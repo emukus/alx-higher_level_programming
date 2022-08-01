@@ -1,16 +1,20 @@
-Refer to the following documentation for details on proper guidelines:
-https://docs.python.org/3/library/doctest.html
-
 ``1-my_list`` module
 ============================
 
-``MyList`` usage
+Using ``MyList``
 ---------------------
+
+Refer to the following documentation for details
+on proper guidelines:
+https://docs.python.org/3/library/doctest.html
+First import ``MyList`` from the ``1-my_list`` module:
 
 >>> MyList = __import__('1-my_list').MyList
 
 Command line call for Doctest:
 python3 -m doctest -v ./tests/1-my_list.txt | tail -2
+
+Now use it:
 
 Base case
 ---------
@@ -23,23 +27,7 @@ Base case
 >>> type(MyList())
 <class '1-my_list.MyList'>
 
->>> issubclass(MyList, list print(my_list)
-[1, 4, 2, 3, 5]
->>> my_list += [0]
->>> print(my_list)
-[1, 4, 2, 3, 5, 0]
->>> my_list.print_sorted()
-[0, 1, 2, 3, 4, 5]
-
-Test for empty list:
-
->>> my_list = MyList([])
->>> print(my_list)
-[]
->>> my_list += [1]
->>> print(my_list)
-[1]
->>> my_li)
+>>> issubclass(MyList, list)
 True
 
 >>> 'print_sorted' in dir(MyList)
@@ -74,7 +62,23 @@ Test for negative numbers:
 Test for zero:
 
 >>> my_list = MyList([1, 4, 2, 3, 5])
->>>st.print_sorted()
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+>>> my_list += [0]
+>>> print(my_list)
+[1, 4, 2, 3, 5, 0]
+>>> my_list.print_sorted()
+[0, 1, 2, 3, 4, 5]
+
+Test for empty list:
+
+>>> my_list = MyList([])
+>>> print(my_list)
+[]
+>>> my_list += [1]
+>>> print(my_list)
+[1]
+>>> my_list.print_sorted()
 [1]
 
 Test for list of one:
