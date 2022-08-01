@@ -1,11 +1,11 @@
-Refer to the following documentation for details on proper guidelines:
-https://docs.python.org/3/library/doctest.html
-
 ``1-my_list`` module
 ============================
 
 ``MyList`` usage
 ---------------------
+
+Refer to the following documentation for details on proper guidelines:
+https://docs.python.org/3/library/doctest.html
 
 >>> MyList = __import__('1-my_list').MyList
 
