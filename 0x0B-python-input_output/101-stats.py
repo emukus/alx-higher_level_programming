@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Reads from standard input and computes metrics.
-After every ten lines or the input of a keyboard interruption (CTRL + C), prints the following statistics:
+After every ten lines or the input of a keyboard interruption (CTRL + C),
+prints the following statistics:
     - Total file size up to that point.
     - Count of read status codes up to that point.
 """
@@ -22,7 +23,7 @@ if __name__ == "__main__":
             code = int(words[-2])
             if code in codes:
                 codes[code] += 1
-        except:
+        except (IndexError, ValueError):
             pass
 
     def print_stats():
