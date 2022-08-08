@@ -36,7 +36,7 @@ class Base:
         param list_dictionaries: a list of dictionaries
         return: A JSON string representation of list_dictionaries.
         """
-        if list_dictionaries is None:
+        if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         else:
             return json.dumps(list_dictionaries)
@@ -157,25 +157,39 @@ class Base:
             return []
 
     @classmethod
-    def draw(cls, list_rectangles, list_squares):
+    def draw(list_rectangles, list_squares):
         """Draws the figure(Rectangles and Squares) using the turtle
         module.
         """
-        window = turtle.Screen()
-        pen = turtle.Pen()
-        figures = list_rectangles + list_squares
+        turt = turtle.Turtle()
+        turt.screen.bgcolor("green")
+        turt.pensize(3)
+        turt.shape("turtle")
 
-        for fig in figures:
-            pen.up()
-            pen.goto(fig.x, fig.y)
-            pen.down()
-            pen.forward(fig.width)
-            pen.right(90)
-            pen.forward(fig.height)
-            pen.right(90)
-            pen.forward(fig.width)
-            pen.right(90)
-            pen.forward(fig.height)
-            pen.right(90)
+        turt.color("red")
+        for rect in list_rectangles:
+            turt.showturtle()
+            turt.up()
+            turt.goto(rect.x, rect.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(rect.width)
+                turt.left(90)
+                turt.forward(rect.height)
+                turt.left(90)
+            turt.hideturtle()
 
-        window.exitonclick()
+        turt.color("yellow")
+        for sq in list_squares:
+            turt.showturtle()
+            turt.up()
+            turt.goto(sq.x, sq.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(sq.width)
+                turt.left(90)
+                turt.forward(sq.height)
+                turt.left(90)
+            turt.hideturtle()
+
+        turtle.exitonclick()
