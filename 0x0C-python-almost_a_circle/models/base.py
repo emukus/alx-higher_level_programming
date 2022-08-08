@@ -7,6 +7,7 @@ avoid duplicating code (and bugs).
 
 import json
 import turtle
+import csv
 
 
 class Base:
@@ -109,50 +110,42 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """Saves to csv file
-        If the list of objects is empty, write an empty string to the file.
-        Else, convert the list of objects to a list of dictionaries,
-        write the keys of the first dictionary as the header, and
-        write the dictionaries as rows.
+        """Write the CSV serialization of a list of objects to a file.
 
         param cls: the class we're calling the method on
         param list_objs: list of objects to be saved
         """
         filename = cls.__name__ + ".csv"
-        content = ""
-        text = []
-        if list_objs is not None:
-            content += ','.join(list_objs[0].to_dictionary().keys())
-            content += '\n'
-            for lst in list_objs:
-                content += ','.join(
-                    map(str, lst.to_dictionary().values())
-                )
-                content += '\n'
-
-        with open(filename, mode="w", encoding="utf-8") as f:
-            return f.write(content)
+        with open(filename, "w", newline="") as csvfile:
+            if list_objs is None or list_objs == []:
+                csvfile.write("[]")
+            else:
+                if cls.__name__ == "Rectangle":
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                for obj in list_objs:
+                    writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
-        """Loads from csv
-        It reads a csv file, creates a list of dictionaries,
-        then creates a list of objects
+        """Return a list of classes instantiated from a CSV file.
 
         param cls: the class that we're calling the method on
         return: A list of objects
         """
         filename = cls.__name__ + ".csv"
-        object_created = []
         try:
-            with open(filename, 'r') as f:
-                header = f.readline().replace('\n', '').split(',')
-                for el in f.readlines():
-                    values = map(int, el.replace('\n', '').split(','))
-                    data = dict(zip(header, values))
-                    object_created.append(cls.create(**data))
-
-            return object_created
+            with open(filename, "r", newline="") as csvfile:
+                if cls.__name__ == "Rectangle":
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
+                list_dicts = [dict([k, int(v)] for k, v in d.items())
+                              for d in list_dicts]
+                return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
 
