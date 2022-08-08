@@ -115,7 +115,7 @@ class Rectangle(Base):
             for (name, value) in kwargs.items():
                 setattr(self, name, value)
 
-    def to_dictionary(self) -> int:
+    def to_dictionary(self):
         """Rectangle to dictionary
         Returns the dictionary representation of a Rectangle
         return: A dictionary with id, width, height, x, and y of the rectangle
