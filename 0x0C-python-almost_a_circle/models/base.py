@@ -8,6 +8,7 @@ avoid duplicating code (and bugs).
 import json
 import turtle
 
+
 class Base:
     """Module implementation"""
 
@@ -61,7 +62,7 @@ class Base:
         param json_string: the string to be converted
         return: A list of JSON string representation.
         """
-        if json_string is None or len(json_string) == 0:
+        if json_string is None or json_string == "[]":
             return []
         else:
             return json.loads(json_string)
@@ -98,15 +99,13 @@ class Base:
         param cls: the class we're calling the method on
         return: A list of instances
         """
-        filename = cls.__name__ + ".json"
-        object_created = []
-        with open(filename, 'r') as f:
-            file_string = f.read().replace('\n', '')
-            data = cls.from_json_string(file_string)
-            for el in data:
-                object_created.append(cls.create(**el))
-
-        return object_created
+        filename = str(cls.__name__) + ".json"
+        try:
+            with open(filename, "r") as f:
+                list_dicts = Base.from_json_string(f.read())
+                return [cls.create(**d) for d in list_dicts]
+        except IOError:
+            return []
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
@@ -145,15 +144,17 @@ class Base:
         """
         filename = cls.__name__ + ".csv"
         object_created = []
+        try:
+            with open(filename, 'r') as f:
+                header = f.readline().replace('\n', '').split(',')
+                for el in f.readlines():
+                    values = map(int, el.replace('\n', '').split(','))
+                    data = dict(zip(header, values))
+                    object_created.append(cls.create(**data))
 
-        with open(filename, 'r') as f:
-            header = f.readline().replace('\n', '').split(',')
-            for el in f.readlines():
-                values = map(int, el.replace('\n', '').split(','))
-                data = dict(zip(header, values))
-                object_created.append(cls.create(**data))
-
-        return object_created
+            return object_created
+        except IOError:
+            return []
 
     @classmethod
     def draw(cls, list_rectangles, list_squares):
