@@ -9,28 +9,26 @@ class Square(Rectangle):
     def __init__(self, size: int, x=0, y=0, id=None):
         """Initializes a new Square"""
         super().__init__(size, size, x, y, id)
-        self.__size = size
 
     @property
     def size(self) -> int:
         """Size getter
         Returns the size(side) of the square
         """
-        return self.__size
+        return self.width
 
     @size.setter
     def size(self, value: int):
         """Size setter
         Sets the size of the square
         """
-        self.__size = value
         self.width = self.height = value
 
     def __str__(self) -> str:
         """The __str__ method returns a string representation of the object
         return: The id, x, y, and size of the square."""
         id = self.id
-        size = self.__size
+        size = self.width
         x = self.x
         y = self.y
         return "[Square] ({}) {}/{} - {}".format(id, x, y, size)
