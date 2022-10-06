@@ -1,1 +1,1 @@
-# Python - Object-relational mapping
+Python - if/else, loops, functions
