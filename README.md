@@ -1,1 +1,1 @@
-# Higher Level Programming - Python / Javascript
+# Higher Level Programming - Python / SQL / Javascript
